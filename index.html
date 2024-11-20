@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Vue Todo List</title>
+</head>
+<body>
+  <div id="app1">
+    <h1>My Todo List</h1>
+    <input type="text" name="" id="newItemText" v-model="newTask">
+    <button v-on:click="addItem">Add Item</button>
+    <ul id="todoList">
+        <li>Task 1</li>
+    </ul>
+  </div>
+
+  <div id="app2">
+    <h1>My Todo List using Array</h1>
+    <input type="text" name="" id="newItemText" v-model="newTask">
+    <button v-on:click="addItem">Add Item</button>
+    <ul id="todoList">
+        <li v-for="task in tasks"> {{task}} </li>
+    </ul>
+  </div>
+
+<script>
+    let app1 = new Vue({
+        el: '#app1',
+        data(){
+            return {
+                newTask:'',
+            }
+        },
+        methods:{
+            addItem: function(){
+                let taskItem = document.createElement('li');
+                taskItem.innerText = this.newTask;
+                document.getElementById('todoList').appendChild(taskItem);
+                this.newTask='';
+            }
+        }
+    });
+
+    let app2 = new Vue({
+        el: '#app2',
+        data(){
+            return {
+                newTask:'',
+                tasks:['Task 1', 'Task 2', 'Task 3']
+            }
+        },
+        methods:{
+            addItem(){
+                if (this.newTask.trim() !==  '')
+            {
+                this.tasks.push(this.newTask)
+                this.newTask = ''
+            }
+            }
+        }
+    });
+
+</script>
+    
+</body>
+</html>
